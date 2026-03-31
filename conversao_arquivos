@@ -1,0 +1,50 @@
+
+
+//==============================================
+//    Conversão de tipo de dados JavaScript
+//==============================================
+
+// String -> Numero
+
+let num1 = "35"
+Number(num1) // saida numero 35
+
+let num = Number("42") // saida numero 42
+
+// Float / Int -> 
+
+let float = parseFloat("3.14"); // saida numero (float) 3.14
+
+let inteiro = parseInt("10.5"); // saida numero (int) 10
+
+// Numero -> String
+
+let str = String(100) // saida texto "100"
+let str2 = (12).toString() // saida texto "12"
+
+// Boolean -> Numero
+
+console.log(Number(True)) // saida numero 1
+console.log(Number(False)) // saida numero 0
+
+//==============================================
+//           Literais em javascript
+//==============================================
+
+let texto = "Isso é uma string"
+let nome = "Victor"
+console.log("String Literal")
+
+let template = `Olá, ${nome}`
+
+
+let fruta = "Uva"
+let frutas = ["Maça","Mamão","Melão"]
+
+let ligado = true
+let desligado = false
+
+let pessoa = {
+    nome: "Ana",
+    idade: "30"
+}
