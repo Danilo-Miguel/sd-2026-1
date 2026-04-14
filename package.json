@@ -31,12 +31,25 @@
     "strip-final-newline": "^2.0.0",
     "which-module": "^2.0.1",
     "wrap-ansi": "^6.2.0",
+    "ws": "^8.20.0",
     "y18n": "^4.0.3",
     "yargs": "^15.4.1",
     "yargs-parser": "^18.1.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "monolito": "node monolito/monolito.js",
+    "micro:usuarios": "node microservicos/usuarios-service/server.js",
+    "micro:pedidos": "node microservicos/pedidos-service/server.js",
+    "micro:gateway": "node microservicos/api-gateway/server.js",
+    "micro:conceitos": "node microservicos/conceitos-microservicos.js",
+    "ws:server": "node websocket/ws-pedidos-servidor.js",
+    "ws:client": "node websocket/ws-pedidos-cliente.js",
+    "api:conceitos": "node conceitos/api-conceitos.js",
+    "api:spotify": "node apis/api-spotify.js",
+    "api:f1": "node apis/api-formula1.js",
+    "http:conceitos": "node conceitos/http-conceitos.js",
+    "ws:conceitos": "node conceitos/websocket-conceitos.js"
   },
   "repository": {
     "type": "git",

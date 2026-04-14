@@ -1,0 +1,262 @@
+{
+  "_instrucoes": [
+    "Este arquivo contem exemplos de requisicoes HTTP para testar o monolito.js.",
+    "Use Postman, Insomnia ou Thunder Client (extensao do VS Code) para enviar essas requisicoes.",
+    "Primeiro inicie o servidor: node monolito.js",
+    "O servidor roda em: http://localhost:3000"
+  ],
+
+  "usuarios": {
+
+    "POST_criar_um_usuario": {
+      "_descricao": "Cria um unico usuario. O campo 'id' e gerado automaticamente pelo servidor.",
+      "metodo": "POST",
+      "url": "http://localhost:3000/usuarios",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "nome": "Ana Lima",
+        "email": "ana@email.com",
+        "idade": 28
+      },
+      "_resposta_esperada": {
+        "status": 201,
+        "body": {
+          "message": "Usuário criado com sucesso",
+          "usuario": {
+            "nome": "Ana Lima",
+            "email": "ana@email.com",
+            "idade": 28,
+            "id": 1
+          }
+        }
+      }
+    },
+
+    "POST_criar_segundo_usuario": {
+      "_descricao": "Cria um segundo usuario. O id gerado sera 2 pois ja existe 1 usuario.",
+      "metodo": "POST",
+      "url": "http://localhost:3000/usuarios",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "nome": "Carlos Souza",
+        "email": "carlos@email.com",
+        "idade": 35
+      },
+      "_resposta_esperada": {
+        "status": 201,
+        "body": {
+          "message": "Usuário criado com sucesso",
+          "usuario": {
+            "nome": "Carlos Souza",
+            "email": "carlos@email.com",
+            "idade": 35,
+            "id": 2
+          }
+        }
+      }
+    },
+
+    "POST_criar_terceiro_usuario": {
+      "_descricao": "Cria um terceiro usuario. Id sera 3.",
+      "metodo": "POST",
+      "url": "http://localhost:3000/usuarios",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "nome": "Beatriz Rocha",
+        "email": "beatriz@email.com",
+        "idade": 22
+      },
+      "_resposta_esperada": {
+        "status": 201
+      }
+    },
+
+    "GET_listar_todos_usuarios": {
+      "_descricao": "Retorna todos os usuarios cadastrados. Sem body, sem parametros na URL.",
+      "metodo": "GET",
+      "url": "http://localhost:3000/usuarios",
+      "_resposta_esperada": {
+        "status": 200,
+        "body": [
+          { "nome": "Ana Lima", "email": "ana@email.com", "idade": 28, "id": 1 },
+          { "nome": "Carlos Souza", "email": "carlos@email.com", "idade": 35, "id": 2 },
+          { "nome": "Beatriz Rocha", "email": "beatriz@email.com", "idade": 22, "id": 3 }
+        ]
+      }
+    },
+
+    "GET_buscar_usuario_por_id": {
+      "_descricao": [
+        "Busca um usuario especifico pelo ID.",
+        "O ID e passado diretamente na URL, no trecho apos /usuarios/.",
+        "Exemplo: /usuarios/1 busca o usuario de id 1.",
+        "Exemplo: /usuarios/2 busca o usuario de id 2."
+      ],
+      "metodo": "GET",
+      "url_exemplo_id_1": "http://localhost:3000/usuarios/1",
+      "url_exemplo_id_2": "http://localhost:3000/usuarios/2",
+      "_resposta_esperada_id_1": {
+        "status": 200,
+        "body": { "nome": "Ana Lima", "email": "ana@email.com", "idade": 28, "id": 1 }
+      },
+      "_resposta_id_inexistente": {
+        "url": "http://localhost:3000/usuarios/99",
+        "status": 404,
+        "body": { "erro": "Usuário não encontrado" }
+      }
+    },
+
+    "PUT_substituir_usuario_completo": {
+      "_descricao": [
+        "Substitui TODOS os dados do usuario de id 1.",
+        "O ID e passado na URL: /usuarios/1",
+        "O body deve conter TODOS os campos, mesmo os que nao mudaram.",
+        "Se omitir um campo, ele some do registro."
+      ],
+      "metodo": "PUT",
+      "url": "http://localhost:3000/usuarios/1",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "nome": "Ana Lima Silva",
+        "email": "ana.silva@email.com",
+        "idade": 29
+      },
+      "_atencao": "O id NAO deve ser enviado no body. O servidor mantem o id original automaticamente.",
+      "_resposta_esperada": {
+        "status": 200,
+        "body": {
+          "message": "Usuário atualizado completamente",
+          "usuario": {
+            "nome": "Ana Lima Silva",
+            "email": "ana.silva@email.com",
+            "idade": 29,
+            "id": 1
+          }
+        }
+      }
+    },
+
+    "PATCH_atualizar_so_email": {
+      "_descricao": [
+        "Atualiza APENAS o email do usuario de id 2.",
+        "O ID e passado na URL: /usuarios/2",
+        "Os outros campos (nome, idade) permanecem inalterados.",
+        "Diferenca do PUT: nao precisa enviar todos os campos."
+      ],
+      "metodo": "PATCH",
+      "url": "http://localhost:3000/usuarios/2",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "email": "carlos.novo@email.com"
+      },
+      "_resposta_esperada": {
+        "status": 200,
+        "body": {
+          "message": "Usuário atualizado parcialmente",
+          "usuario": {
+            "nome": "Carlos Souza",
+            "email": "carlos.novo@email.com",
+            "idade": 35,
+            "id": 2
+          }
+        }
+      }
+    },
+
+    "PATCH_atualizar_nome_e_idade": {
+      "_descricao": "Atualiza nome e idade do usuario 3. Email permanece igual.",
+      "metodo": "PATCH",
+      "url": "http://localhost:3000/usuarios/3",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "nome": "Bia Rocha",
+        "idade": 23
+      },
+      "_resposta_esperada": {
+        "status": 200
+      }
+    },
+
+    "DELETE_remover_usuario": {
+      "_descricao": [
+        "Remove o usuario de id 1.",
+        "O ID e passado na URL: /usuarios/1",
+        "Sem body. O servidor devolve os dados do usuario removido."
+      ],
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/usuarios/1",
+      "_resposta_esperada": {
+        "status": 200,
+        "body": {
+          "message": "Usuário removido",
+          "usuario": {
+            "nome": "Ana Lima Silva",
+            "email": "ana.silva@email.com",
+            "idade": 29,
+            "id": 1
+          }
+        }
+      }
+    }
+  },
+
+  "pedidos": {
+
+    "POST_criar_pedido": {
+      "_descricao": "Cria um pedido vinculado ao usuarioId 2. O id e gerado pelo servidor.",
+      "metodo": "POST",
+      "url": "http://localhost:3000/pedidos",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "produto": "Notebook",
+        "quantidade": 1,
+        "usuarioId": 2
+      },
+      "_resposta_esperada": {
+        "status": 201
+      }
+    },
+
+    "POST_criar_segundo_pedido": {
+      "_descricao": "Cria um segundo pedido.",
+      "metodo": "POST",
+      "url": "http://localhost:3000/pedidos",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "produto": "Mouse",
+        "quantidade": 2,
+        "usuarioId": 3
+      }
+    },
+
+    "GET_listar_pedidos": {
+      "_descricao": "Retorna todos os pedidos.",
+      "metodo": "GET",
+      "url": "http://localhost:3000/pedidos"
+    }
+  },
+
+  "geral": {
+    "GET_todos_os_dados": {
+      "_descricao": "Retorna usuarios e pedidos juntos. Util para inspecionar o estado do servidor.",
+      "metodo": "GET",
+      "url": "http://localhost:3000/dados"
+    }
+  }
+}

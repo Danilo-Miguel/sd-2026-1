@@ -1,0 +1,106 @@
+{
+  "visao_geral": {
+    "descricao": "Exemplos de chamadas para testar os microsservicos via API Gateway",
+    "base_url_gateway": "http://localhost:4000",
+    "ordem_recomendada": [
+      "1. criar usuarios",
+      "2. listar usuarios",
+      "3. criar pedidos",
+      "4. listar pedidos",
+      "5. consultar dados agregados"
+    ]
+  },
+  "usuarios": {
+    "criar_usuario_1": {
+      "metodo": "POST",
+      "url": "http://localhost:4000/usuarios",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "nome": "Ana",
+        "email": "ana@email.com",
+        "idade": 28
+      }
+    },
+    "criar_usuario_2": {
+      "metodo": "POST",
+      "url": "http://localhost:4000/usuarios",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "nome": "Bruno",
+        "email": "bruno@email.com",
+        "idade": 31
+      }
+    },
+    "listar_usuarios": {
+      "metodo": "GET",
+      "url": "http://localhost:4000/usuarios"
+    },
+    "buscar_usuario_por_id": {
+      "metodo": "GET",
+      "url": "http://localhost:4000/usuarios/1"
+    },
+    "put_usuario_1": {
+      "metodo": "PUT",
+      "url": "http://localhost:4000/usuarios/1",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "nome": "Ana Clara",
+        "email": "ana.clara@email.com",
+        "idade": 29
+      }
+    },
+    "patch_usuario_2": {
+      "metodo": "PATCH",
+      "url": "http://localhost:4000/usuarios/2",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "email": "bruno.novo@email.com"
+      }
+    },
+    "delete_usuario_2": {
+      "metodo": "DELETE",
+      "url": "http://localhost:4000/usuarios/2"
+    }
+  },
+  "pedidos": {
+    "criar_pedido_valido": {
+      "metodo": "POST",
+      "url": "http://localhost:4000/pedidos",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "produto": "Notebook",
+        "quantidade": 1,
+        "usuarioId": 1
+      }
+    },
+    "criar_pedido_usuario_inexistente": {
+      "metodo": "POST",
+      "url": "http://localhost:4000/pedidos",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "produto": "Mouse",
+        "quantidade": 2,
+        "usuarioId": 999
+      },
+      "status_esperado": 404
+    },
+    "listar_pedidos": {
+      "metodo": "GET",
+      "url": "http://localhost:4000/pedidos"
+    },
+    "pedidos_do_usuario_1": {
+      "metodo": "GET",
+      "url": "http://localhost:4000/pedidos/usuario/1"
+    },
+    "deletar_pedido_1": {
+      "metodo": "DELETE",
+      "url": "http://localhost:4000/pedidos/1"
+    }
+  },
+  "agregado": {
+    "dados_completos": {
+      "metodo": "GET",
+      "url": "http://localhost:4000/dados"
+    }
+  }
+}
