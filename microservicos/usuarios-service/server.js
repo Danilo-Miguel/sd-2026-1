@@ -122,7 +122,7 @@ app.delete("/usuarios/:id", function(req, res){
 
 })
 
-const PORTA = process.env.PORT || 401
+const PORTA = process.env.PORT || 4001
 app.listen(PORTA, function(){
  console.log("[usuarios-service] rodando em localhost://" + PORTA )
 })
