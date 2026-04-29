@@ -1,4 +1,3 @@
-const e = require("express")
 const express = require("express")
 const app = express()
 
@@ -38,11 +37,6 @@ async function encaminhar(req, res, destinoBaseUrl, caminho) {
     }
 }
 
-
-
-app.get("/health", function(req, res){
-    res.status(200).json({servico: "user-service", status:"ok"})
-})
 
 app.get("/health", function(req, res){
     res.status(200).json({servico: "api-gateway", status:"ok"})
