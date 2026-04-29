@@ -21,7 +21,8 @@ app.post("/usuarios", function(req, res){
         id: usuarios.length + 1,
         nome: nome,
         email: email,
-        idade: idade || null
+        idade: idade || null,
+        criadoEm: new Date().toISOString()
     }
 
     usuarios.push(usuario);
@@ -107,7 +108,7 @@ app.delete("/usuarios/:id", function(req, res){
     return res.status(200).json({message: 'Usuario removido com sucesso', usuario: removido[0]});
 });
 
-const PORTA = process.env.PORT || 401;
+const PORTA = process.env.PORT || 4001;
 app.listen(PORTA, function(){
     console.log(`User-service tá rodando na porta http://localhost:${PORTA}`);
 });
